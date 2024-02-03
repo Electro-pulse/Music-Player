@@ -1,13 +1,9 @@
-# music_player
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
+# Music Player App
+A minimal music player app that uses Neumorphic UI design.<br>
+It has basic functinalities of audio player like Play, Pause, Resume, Repeat and Shuffle.<br>
+It can be used to play all local audio files from the device storage.<br>
+It has Dark mode too<hr>
+### Learn Flutter?
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
