@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
                           title: Text(song.title.split(RegExp(r'[-([]'))[0],style: const TextStyle(fontWeight: FontWeight.bold),),
                           subtitle: Text(song.artist ?? "Unknown"),
                           leading: QueryArtworkWidget(
-                            nullArtworkWidget: const Icon(Icons.music_note),
+                            nullArtworkWidget: const Icon(Icons.music_note,size: 50),
                             keepOldArtwork: true,
                             artworkFit: BoxFit.fill,
                             id: song.id,

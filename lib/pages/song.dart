@@ -30,10 +30,10 @@ class SongPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 25,bottom: 25,right: 25),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
                   children: [
-                    const SizedBox(height: 20,),
                     // Custom app bar
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class SongPage extends StatelessWidget {
                           }, 
                           icon: const Icon(Icons.arrow_back),
                         ),
-                        const Text("P L A Y E R"),
+                        const Text("P L A Y E R",style: TextStyle(fontSize: 18),),
                         IconButton(
                           onPressed: (){}, 
                           icon: const Icon(Icons.menu),
@@ -54,60 +54,61 @@ class SongPage extends StatelessWidget {
                   ],
                 ),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                       //album artwork
                       SizedBox(
-                        height: 422,
+                        height: 400,
                         width: 400,
-                        child: NeuBox(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              // artist image
-                              SizedBox(
-                                height: 300,
-                                width: 300,
-                                child: QueryArtworkWidget(
-                                  nullArtworkWidget: Lottie.asset("assets/lottie_icons/player.json"),
-                                  keepOldArtwork: true,
-                                  artworkQuality: FilterQuality.medium,
-                                  artworkBorder: BorderRadius.circular(8),
-                                  artworkFit: BoxFit.contain,
-                                  id: currentSong.id,
-                                  type: ArtworkType.AUDIO),
-                              ),
-                              //song, artist name and fav icon
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 250,
-                                        child: Text(currentSong.title.split(RegExp(r'[-([]'))[0],
-                                        style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
-                                        maxLines: 2,
+                        child: GestureDetector(
+                          child: NeuBox(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                // artist image
+                                SizedBox(
+                                  height: 280,
+                                  width: 280,
+                                  child: QueryArtworkWidget(
+                                    nullArtworkWidget: Lottie.asset("assets/lottie_icons/player.json"),
+                                    keepOldArtwork: true,
+                                    artworkQuality: FilterQuality.high,
+                                    artworkBorder: BorderRadius.circular(8),
+                                    id: currentSong.id,
+                                    type: ArtworkType.AUDIO),
+                                ),
+                          
+                                //song, artist name and fav icon
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: 250,
+                                          child: Text(currentSong.title.split(RegExp(r'[-([]'))[0],
+                                          style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
+                                          maxLines: 2,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 250,
-                                        child: Text(currentSong.artist != null ? currentSong.artist!.split(RegExp(r'[-([]'))[0] : "Unknown",
-                                        maxLines: 2,
+                                        SizedBox(
+                                          width: 250,
+                                          child: Text(currentSong.artist != null ? currentSong.artist!.split(RegExp(r'[-([]'))[0] : "Unknown",
+                                          maxLines: 2,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  IconButton(
-                                    icon :value.isFav ?
-                                    const Icon(Icons.favorite,color: Colors.green) :
-                                    const Icon(Icons.favorite_border),
-                                    onPressed: () => value.toggleFav(),
-                                  ),
-                                ],
-                              )
-                            ],
+                                      ],
+                                    ),
+                                    IconButton(
+                                      icon :value.isFav ?
+                                      const Icon(Icons.favorite,color: Colors.green) :
+                                      const Icon(Icons.favorite_border),
+                                      onPressed: () => value.toggleFav(),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -165,11 +166,12 @@ class SongPage extends StatelessWidget {
                       Row(
                         children: [
                           // skip previous 
-                          Expanded(child: GestureDetector(
-                            onTap: value.playPreviousSong,
-                            child: const NeuBox(child: Icon(Icons.skip_previous),
-                            ),
-                          )
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: value.playPreviousSong,
+                              child: const NeuBox(child: Icon(Icons.skip_previous),
+                              ),
+                            )
                           ),
                 
                           const SizedBox(width: 20,),
@@ -197,6 +199,7 @@ class SongPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 20,)
                 ],
               ),
             ),
