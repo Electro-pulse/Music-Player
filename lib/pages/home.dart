@@ -32,6 +32,13 @@ class _HomeState extends State<Home> {
     playlistProvider = Provider.of<PlaylistProvider>(context,listen: false);
   }
 
+ // dispose audio player
+  @override
+  void dispose() {
+    playlistProvider.audioPlayer.dispose();
+    super.dispose();
+  }
+  
   // Getting storage access
   checkAndRequestPermissions({bool retry = false}) async {
     // The param 'retryRequest' is false, by default.

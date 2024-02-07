@@ -10,7 +10,7 @@ class PlaylistProvider extends ChangeNotifier {
   bool _isFav = false;
   bool _isRepeat = false;
   bool _isShuffle = false;
-  int? tempIndex;
+  int tempIndex = 0;
 
   //playlist of songs
   late final List<SongModel> _playlist;
@@ -89,8 +89,7 @@ class PlaylistProvider extends ChangeNotifier {
       resume();
     }
     notifyListeners();
-  }
-
+  }//play
   // seek to a specific position
   void seek(Duration position) async {
     await _audioPlayer.seek(position);
@@ -101,7 +100,8 @@ class PlaylistProvider extends ChangeNotifier {
     if (_currentSongIndex != null){
       if(_isShuffle){
       _currentSongIndex = random.nextInt(_playlist.length);
-      tempIndex = _currentSongIndex;
+      tempIndex = _currentSongIndex!;
+      play();
       }
       else {
         if (_currentSongIndex! < _playlist.length-1){
@@ -117,17 +117,12 @@ class PlaylistProvider extends ChangeNotifier {
 
   // play previous song
   void playPreviousSong() async {
-    if(_isShuffle){
-      _currentSongIndex = tempIndex;
-    }
-    else {
       if(_currentSongIndex! > 0){
         currentSongIndex = _currentSongIndex! - 1;
       }
       else {
         currentSongIndex = _playlist.length - 1;
       }
-    }
     notifyListeners();
   }
 
@@ -158,12 +153,6 @@ class PlaylistProvider extends ChangeNotifier {
     );
   }
   
-  // dispose audio player
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
-  }
 
   // G E T T E R S
   List<SongModel> get playlist => _playlist;
@@ -175,6 +164,7 @@ class PlaylistProvider extends ChangeNotifier {
   bool get isFav => _isFav;
   bool get isRepeat => _isRepeat;
   bool get isShuffle => _isShuffle;
+  AudioPlayer get audioPlayer => _audioPlayer;
 
   //S E T T E R S
   set currentSongIndex(int? newIndex) {
